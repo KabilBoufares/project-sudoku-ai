@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SudokuSolverAI - Visualisation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>SudokuSolverAI</h1>
+    <div class="controls">
+      <label for="difficulty">Difficulté :</label>
+      <select id="difficulty">
+        <option value="easy">Facile</option>
+        <option value="medium">Moyen</option>
+        <option value="hard">Difficile</option>
+        <option value="expert" selected>Expert</option>
+      </select>
+      <button id="run-btn">▶️ Relancer tous les algos</button>
+    </div>
+    <p class="subtitle">Visualisation des performances des algorithmes</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Grille Initiale</h2>
+      <div id="initial-grid" class="sudoku-grid"></div>
+    </section>
+    <section>
+      <h2>Résultats des algorithmes</h2>
+      <div id="algorithm-tabs" class="tabs"></div>
+      <div id="algorithm-results" class="results-container"></div>
+    </section>
+    <section>
+      <h2>Comparaison des performances</h2>
+      <div class="chart-container"><canvas id="execution-time-chart"></canvas></div>
+      <div class="chart-container"><canvas id="iterations-chart"></canvas></div>
+      <div class="chart-container"><canvas id="conflicts-chart"></canvas></div>
+      <div class="chart-container"><canvas id="false-cells-chart"></canvas></div>
+    </section>
+    <section>
+      <h2>Statistiques détaillées</h2>
+      <div class="table-container">
+        <table id="stats-table">
+          <thead>
+            <tr>
+              <th>Algorithme</th>
+              <th>Temps (s)</th>
+              <th>Itérations</th>
+              <th>Conflits</th>
+              <th>Cases fausses</th>
+              <th>Succès</th>
+            </tr>
+          </thead>
+          <tbody id="stats-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>SudokuSolverAI &copy; 2025</p>
+  </footer>
+
+  <div class="loader" id="loader" style="display:none;">Chargement...</div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
