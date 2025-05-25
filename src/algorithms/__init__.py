@@ -13,10 +13,9 @@ from .a_star_bt import solve as a_star_bt  # Assure-toi que ce fichier existe !
 # --- Recherche locale (métaheuristique) ---
 from .hill_climbing import solve as hill_climbing
 from .hill_climbing_restart import solve as hill_climbing_restart
-from .simulated_annealing import solve as simulated_annealing
 
 # --- CSP (contraintes) ---
-from .csp_forward import solve as csp_forward
+
 
 # --- Dictionnaire centralisé des solveurs ---
 ALGORITHMS = {
@@ -27,7 +26,5 @@ ALGORITHMS = {
     "A* + Backtracking": a_star_bt,
     "Hill Climbing": hill_climbing,
     "Hill Climbing + Restart": hill_climbing_restart,
-    "Simulated Annealing": simulated_annealing,
-    "CSP + Forward Checking": csp_forward,
     "Beam Search": beam,
 }

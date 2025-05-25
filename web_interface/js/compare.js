@@ -1,160 +1,141 @@
-/**
- * Comparison Module
- * Handles the generation of comparison tables
- */
-
 const ComparisonGenerator = {
-  /**
-   * Generate the comparison table
-   * @param {Array} results - Array of algorithm results
-   */
   generateComparisonTable(results) {
     const tableBody = document.getElementById('comparison-body');
     tableBody.innerHTML = '';
-    
-    // Sort results by category, then by success (successful first), then by time
-    results.sort((a, b) => {
-      // First by category
-      if (a.categorie !== b.categorie) {
-        return a.categorie.localeCompare(b.categorie);
+
+    const grouped = {
+      'recherche_aveugle': [],
+      'recherche_informee': [],
+      'recherche_locale': [],
+      'recherche_csp': []
+    };
+
+    results.forEach(res => {
+      if (grouped[res.categorie]) {
+        grouped[res.categorie].push(res);
       }
-      
-      // Then by success (successful first)
-      if (a.taux_succes !== b.taux_succes) {
-        return b.taux_succes - a.taux_succes;
-      }
-      
-      // Then by time (faster first)
-      return a.temps - b.temps;
     });
-    
-    // Add rows for each algorithm
-    results.forEach(result => {
-      const row = document.createElement('tr');
-      row.className = result.taux_succes ? 'success' : 'failure';
-      
-      // Algorithm name
-      const nameCell = document.createElement('td');
-      nameCell.textContent = result.algorithme;
-      row.appendChild(nameCell);
-      
-      // Category
-      const categoryCell = document.createElement('td');
-      categoryCell.textContent = this.getCategoryName(result.categorie);
-      row.appendChild(categoryCell);
-      
-      // Success
-      const successCell = document.createElement('td');
-      const successBadge = document.createElement('span');
-      successBadge.className = `status-badge ${result.taux_succes ? 'success' : 'error'}`;
-      successBadge.textContent = result.taux_succes ? 'Success' : 'Failed';
-      successCell.appendChild(successBadge);
-      row.appendChild(successCell);
-      
-      // Time
-      const timeCell = document.createElement('td');
-      timeCell.textContent = result.temps.toFixed(3) + 's';
-      row.appendChild(timeCell);
-      
-      // Iterations
-      const iterationsCell = document.createElement('td');
-      iterationsCell.textContent = result.iterations || '-';
-      row.appendChild(iterationsCell);
-      
-      // Max Depth
-      const depthCell = document.createElement('td');
-      depthCell.textContent = result.profondeur_max || '-';
-      row.appendChild(depthCell);
-      
-      // Memory
-      const memoryCell = document.createElement('td');
-      memoryCell.textContent = this.getMemoryMetric(result);
-      row.appendChild(memoryCell);
-      
-      // Specific metrics
-      const specificCell = document.createElement('td');
-      specificCell.textContent = this.getSpecificMetrics(result);
-      row.appendChild(specificCell);
-      
-      tableBody.appendChild(row);
+
+    Object.entries(grouped).forEach(([cat, algos]) => {
+      if (algos.length === 0) return;
+
+      const block = document.createElement('div');
+      block.className = 'category-comparison';
+
+      const title = document.createElement('h3');
+      title.textContent = this.getCategoryName(cat);
+      block.appendChild(title);
+
+      const table = document.createElement('table');
+      table.className = 'comparison-table';
+
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      const headers = this.getColumns(cat);
+      headers.forEach(h => {
+        const th = document.createElement('th');
+        th.textContent = h.label;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      algos.sort((a, b) => b.taux_succes - a.taux_succes || a.temps - b.temps);
+      algos.forEach(result => {
+        const row = document.createElement('tr');
+        row.className = result.taux_succes ? 'success' : 'failure';
+        headers.forEach(h => {
+          const td = document.createElement('td');
+          td.textContent = h.value(result);
+          row.appendChild(td);
+        });
+        tbody.appendChild(row);
+      });
+
+      table.appendChild(tbody);
+      block.appendChild(table);
+      tableBody.appendChild(block);
     });
   },
-  
-  /**
-   * Get the appropriate memory metric for an algorithm
-   * @param {Object} result - Algorithm result
-   * @returns {String} - Formatted memory metric
-   */
-  getMemoryMetric(result) {
-    if (result.memoire_max_file) {
-      return `${result.memoire_max_file} states`;
-    } else if (result.memoire_max_beam) {
-      return `${result.memoire_max_beam} states`;
-    } else if (result.taille_max_domaine) {
-      return `${result.taille_max_domaine} vals`;
-    } else {
-      return '-';
-    }
+
+  getColumns(category) {
+    const common = [
+      { label: 'Algorithme', value: r => r.algorithme },
+      {
+        label: 'Succès',
+        value: r => r.taux_succes ? '✅' : '❌'
+      },
+      {
+        label: 'Temps (ms)',
+        value: r => `${Math.round(r.temps * 1000)} ms`
+      },
+      {
+        label: 'Itérations',
+        value: r => r.iterations ?? '-'
+      }
+    ];
+
+    const metrics = {
+        'recherche_aveugle': [
+          { label: 'Prof. Max', value: r => r.profondeur_max ?? '-' },
+          {
+            label: 'Mesures dédiées',
+            value: r => {
+              const parts = [];
+              if (r.nb_backtracks !== undefined) parts.push(`backtracks: ${r.nb_backtracks}`);
+              if (r.memoire_max_file !== undefined) parts.push(`mémoire: ${r.memoire_max_file}`);
+              return parts.join(', ') || '-';
+            }
+          }
+        ],
+
+      'recherche_informee': [
+        {
+          label: 'Mesures dédiées',
+          value: r => {
+            const parts = [];
+            if (r.conflits_heuristique !== undefined) parts.push(`conflits: ${r.conflits_heuristique}`);
+            if (r.etats_explores !== undefined) parts.push(`explorés: ${r.etats_explores}`);
+            return parts.join(', ') || '-';
+          }
+        }
+      ],
+      'recherche_locale': [
+        {
+          label: 'Mesures dédiées',
+          value: r => {
+            const parts = [];
+            if (r.conflits_finaux !== undefined) parts.push(`conflits: ${r.conflits_finaux}`);
+            if (r.nb_restarts !== undefined) parts.push(`restarts: ${r.nb_restarts}`);
+            return parts.join(', ') || '-';
+          }
+        }
+      ],
+      'recherche_csp': [
+        {
+          label: 'Mesures dédiées',
+          value: r => {
+            const parts = [];
+            if (r.nb_assignations !== undefined) parts.push(`assignations: ${r.nb_assignations}`);
+            if (r.nb_backtracks !== undefined) parts.push(`backtracks: ${r.nb_backtracks}`);
+            if (r.taille_max_domaine !== undefined) parts.push(`domaine: ${r.taille_max_domaine}`);
+            return parts.join(', ') || '-';
+          }
+        }
+      ]
+    };
+
+    return [...common, ...(metrics[category] || [])];
   },
-  
-  /**
-   * Get specific metrics based on algorithm category
-   * @param {Object} result - Algorithm result
-   * @returns {String} - Formatted specific metrics
-   */
-  getSpecificMetrics(result) {
-    switch (result.categorie) {
-      case 'recherche_aveugle':
-        return result.nb_backtracks ? `${result.nb_backtracks} backtracks` : '-';
-        
-      case 'recherche_informee':
-        const metrics = [];
-        if (result.conflits_heuristique !== undefined) {
-          metrics.push(`${result.conflits_heuristique} conflicts`);
-        }
-        if (result.etats_explores !== undefined) {
-          metrics.push(`${result.etats_explores} states explored`);
-        }
-        return metrics.length > 0 ? metrics.join(', ') : '-';
-        
-      case 'recherche_locale':
-        const localMetrics = [];
-        if (result.conflits_finaux !== undefined) {
-          localMetrics.push(`${result.conflits_finaux} final conflicts`);
-        }
-        if (result.nb_restarts !== undefined) {
-          localMetrics.push(`${result.nb_restarts} restarts`);
-        }
-        return localMetrics.length > 0 ? localMetrics.join(', ') : '-';
-        
-      case 'recherche_csp':
-        const cspMetrics = [];
-        if (result.nb_assignations !== undefined) {
-          cspMetrics.push(`${result.nb_assignations} assignments`);
-        }
-        if (result.nb_backtracks !== undefined) {
-          cspMetrics.push(`${result.nb_backtracks} backtracks`);
-        }
-        return cspMetrics.length > 0 ? cspMetrics.join(', ') : '-';
-        
-      default:
-        return '-';
-    }
-  },
-  
-  /**
-   * Get a human-readable category name
-   * @param {String} category - Category identifier
-   * @returns {String} - Human-readable category name
-   */
+
   getCategoryName(category) {
     const names = {
-      'recherche_aveugle': 'Blind Search',
-      'recherche_informee': 'Informed Search',
-      'recherche_locale': 'Local Search',
-      'recherche_csp': 'Constraint Satisfaction'
+      'recherche_aveugle': 'Recherche Aveugle',
+      'recherche_informee': 'Recherche Informée',
+      'recherche_locale': 'Recherche Locale / Métaheuristique',
+      'recherche_csp': 'Recherche par Contraintes'
     };
-    
     return names[category] || category;
   }
 };

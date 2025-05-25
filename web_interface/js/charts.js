@@ -34,66 +34,77 @@ const ChartRenderer = {
   
   // Chart configuration
   chartConfig: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-        labels: {
-          color: '#f5f6fa',
-          font: {
-            family: 'Poppins',
-            size: 12
-          }
-        }
-      },
-      tooltip: {
-        mode: 'index',
-        intersect: false,
-        backgroundColor: 'rgba(45, 52, 54, 0.9)',
-        titleFont: {
-          family: 'Poppins',
-          size: 14
-        },
-        bodyFont: {
-          family: 'Poppins',
-          size: 13
-        }
-      }
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: '#a29bfe',
-          font: {
-            family: 'Poppins',
-            size: 10
-          }
-        },
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)'
-        }
-      },
-      y: {
-        beginAtZero: true,
-        ticks: {
-          color: '#a29bfe',
-          font: {
-            family: 'Poppins',
-            size: 10
-          }
-        },
-        grid: {
-          color: 'rgba(255, 255, 255, 0.1)'
-        }
-      }
-    },
-    animation: {
-      duration: 1000,
-      easing: 'easeOutQuart'
+  responsive: true,
+  maintainAspectRatio: false,
+  layout: {
+    padding: {
+      top: 20,
+      bottom: 20,
+      left: 10,
+      right: 10
     }
   },
+  plugins: {
+    legend: {
+      display: true,
+      position: 'top',
+      labels: {
+        color: '#f5f6fa',
+        font: {
+          family: 'Poppins',
+          size: 12
+        }
+      }
+    },
+    tooltip: {
+      mode: 'index',
+      intersect: false,
+      backgroundColor: 'rgba(45, 52, 54, 0.9)',
+      titleFont: {
+        family: 'Poppins',
+        size: 14
+      },
+      bodyFont: {
+        family: 'Poppins',
+        size: 13
+      }
+    },
+    title: {
+      display: false
+    }
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: '#a29bfe',
+        font: {
+          family: 'Poppins',
+          size: 10
+        }
+      },
+      grid: {
+        color: 'rgba(255, 255, 255, 0.05)'
+      }
+    },
+    y: {
+      beginAtZero: true,
+      ticks: {
+        color: '#a29bfe',
+        font: {
+          family: 'Poppins',
+          size: 10
+        }
+      },
+      grid: {
+        color: 'rgba(255, 255, 255, 0.05)'
+      }
+    }
+  },
+  animation: {
+    duration: 1000,
+    easing: 'easeOutQuart'
+  }
+},
   
   /**
    * Create and render all charts
