@@ -10,8 +10,10 @@ sys.path.append(str(PROJECT_ROOT))
 
 from src.core.grid import SudokuGrid
 from src.core.validator import is_valid_sudoku
-from src.utils.loader import load_grid
+
 from src.algorithms import ALGORITHMS  # Import centralisé
+from src.utils.loader import load_grid_from_dataset
+
 
 def run_all_algorithms(difficulty: str):
     data_path = PROJECT_ROOT / "data" / f"{difficulty.lower()}.csv"
@@ -19,7 +21,7 @@ def run_all_algorithms(difficulty: str):
     if not data_path.exists():
         raise FileNotFoundError(f"❌ Fichier introuvable : {data_path}")
 
-    grid_initial = SudokuGrid(load_grid(str(data_path)))
+    grid_initial = SudokuGrid(load_grid_from_dataset(data_path))
     results = []
 
     for name, solver in ALGORITHMS.items():
