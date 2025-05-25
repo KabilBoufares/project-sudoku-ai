@@ -1,7 +1,9 @@
+# ==== ALGORITHME : Simulated Annealing (Recherche locale) ====
+
 import random
 import math
 from copy import deepcopy
-from typing import Tuple
+from typing import Dict
 from src.core.grid import SudokuGrid
 
 class SimulatedAnnealingSolver:
@@ -86,7 +88,13 @@ class SimulatedAnnealingSolver:
 
         return False
 
-def solve(sudoku_grid: SudokuGrid) -> Tuple[SudokuGrid, int]:
+def solve(sudoku_grid: SudokuGrid) -> Dict:
     solver = SimulatedAnnealingSolver(sudoku_grid.grid)
-    solver.solve()
-    return SudokuGrid(solver.grid), solver.iterations
+    success = solver.solve()
+    return {
+        "grille_resolue": solver.grid,
+        "iterations": solver.iterations,
+        "taux_succes": success,
+        "conflits_finaux": solver.conflicts,
+        "categorie": "recherche_locale"
+    }

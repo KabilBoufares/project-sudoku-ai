@@ -1,6 +1,8 @@
+# ==== ALGORITHME : Hill Climbing (Recherche locale) ====
+
 import random
 from copy import deepcopy
-from typing import List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional
 from src.core.grid import SudokuGrid
 
 class HillClimbingSolver:
@@ -17,7 +19,6 @@ class HillClimbingSolver:
         self.conflicts = self._calculate_conflicts()
 
     def _generate_initial_grid(self, grid: List[List[int]]) -> List[List[int]]:
-        """Remplit chaque bloc 3x3 avec des chiffres aléatoires sans doublons."""
         new_grid = deepcopy(grid)
         for block_row in range(3):
             for block_col in range(3):
@@ -28,7 +29,6 @@ class HillClimbingSolver:
                         val = grid[block_row * 3 + i][block_col * 3 + j]
                         if val in nums:
                             nums.remove(val)
-                # Remplir les cases restantes
                 random.shuffle(nums)
                 idx = 0
                 for i in range(3):
@@ -40,7 +40,6 @@ class HillClimbingSolver:
         return new_grid
 
     def _calculate_conflicts(self) -> int:
-        """Retourne le nombre de conflits (uniquement lignes et colonnes)."""
         conflicts = 0
         for i in range(9):
             row_count = [0] * 10
@@ -53,9 +52,6 @@ class HillClimbingSolver:
         return conflicts
 
     def solve(self, max_iterations: int = 10000) -> bool:
-        """
-        Applique l’algorithme de Hill Climbing avec recherche de swap optimal local.
-        """
         for _ in range(max_iterations):
             self.iterations += 1
             best_swap: Optional[Tuple[int, int, int, int]] = None
@@ -63,7 +59,6 @@ class HillClimbingSolver:
 
             for block_row in range(3):
                 for block_col in range(3):
-                    # Identifier les cellules modifiables dans ce bloc
                     cells = [
                         (i, j)
                         for i in range(block_row * 3, block_row * 3 + 3)
@@ -76,7 +71,6 @@ class HillClimbingSolver:
                             i1, j1 = cells[idx1]
                             i2, j2 = cells[idx2]
 
-                            # Swap temporaire
                             self.grid[i1][j1], self.grid[i2][j2] = self.grid[i2][j2], self.grid[i1][j1]
                             score = self._calculate_conflicts()
 
@@ -84,7 +78,6 @@ class HillClimbingSolver:
                                 best_score = score
                                 best_swap = (i1, j1, i2, j2)
 
-                            # Défaire le swap
                             self.grid[i1][j1], self.grid[i2][j2] = self.grid[i2][j2], self.grid[i1][j1]
 
             if best_swap:
@@ -98,8 +91,13 @@ class HillClimbingSolver:
 
         return self.conflicts == 0
 
-# Interface attendue par main.py
-def solve(sudoku_grid: SudokuGrid) -> Tuple[SudokuGrid, int]:
+def solve(sudoku_grid: SudokuGrid) -> Dict:
     solver = HillClimbingSolver(sudoku_grid.grid)
-    solver.solve()
-    return SudokuGrid(solver.grid), solver.iterations
+    success = solver.solve()
+    return {
+        "grille_resolue": solver.grid,
+        "iterations": solver.iterations,
+        "taux_succes": success,
+        "conflits_finaux": solver.conflicts,
+        "categorie": "recherche_locale"
+    }

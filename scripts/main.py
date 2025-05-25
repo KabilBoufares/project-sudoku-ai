@@ -11,7 +11,7 @@ sys.path.append(str(PROJECT_ROOT))
 from src.core.grid import SudokuGrid
 from src.core.validator import is_valid_sudoku
 from src.utils.loader import load_grid
-from src.algorithms import ALGORITHMS  # ← Import centralisé
+from src.algorithms import ALGORITHMS  # Import centralisé
 
 def run_all_algorithms(difficulty: str):
     data_path = PROJECT_ROOT / "data" / f"{difficulty.lower()}.csv"
@@ -27,25 +27,27 @@ def run_all_algorithms(difficulty: str):
         try:
             grid_copy = SudokuGrid(grid_initial.to_list())
             start = time.time()
-            solution, iterations = solver(grid_copy)
+            # --- Attendu : chaque solveur retourne un DICO de mesures ---
+            res = solver(grid_copy)
             end = time.time()
+            # Ajoute les infos de temps, nom algo, grille initiale, etc.
+            res["algorithme"] = name
+            res["temps"] = round(end - start, 4)
+            res["grille_initiale"] = grid_initial.to_list()
 
-            is_valid = is_valid_sudoku(solution)
-            conflicts = getattr(solution, 'count_conflicts', lambda: 0)()
-            false_cells = count_false_cells(solution) if not is_valid else 0
+            # Optionnel : vérification manuelle de succès (si non déjà dans res)
+            if "taux_succes" not in res:
+                res["taux_succes"] = is_valid_sudoku(SudokuGrid(res["grille_resolue"]))
 
-            results.append({
-                "algorithme": name,
-                "temps": round(end - start, 4),
-                "iterations": iterations,
-                "succes": is_valid,
-                "conflicts": conflicts,
-                "cases_fausses": false_cells,
-                "grille_initiale": grid_initial.to_list(),
-                "grille_resolue": solution.to_list()
-            })
+            # Optionnel : nombre de cases fausses (utile pour visualisation)
+            if "cases_fausses" not in res and not res.get("taux_succes", False):
+                res["cases_fausses"] = count_false_cells(SudokuGrid(res["grille_resolue"]))
+            else:
+                res["cases_fausses"] = 0
 
-            if not is_valid:
+            results.append(res)
+
+            if not res.get("taux_succes", False):
                 print(f"⚠️ {name} a généré une solution invalide.")
 
         except Exception as e:

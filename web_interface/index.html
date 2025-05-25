@@ -1,71 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SudokuSolverAI - Visualisation</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku AI Comparator</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>SudokuSolverAI</h1>
-    <div class="controls">
-      <label for="difficulty">Difficulté :</label>
-      <select id="difficulty">
-        <option value="easy">Facile</option>
-        <option value="medium">Moyen</option>
-        <option value="hard">Difficile</option>
-        <option value="expert" selected>Expert</option>
-      </select>
-      <button id="run-btn">▶️ Relancer tous les algos</button>
-    </div>
-    <p class="subtitle">Visualisation des performances des algorithmes</p>
-  </header>
-
-  <main>
-    <section>
-      <h2>Grille Initiale</h2>
-      <div id="initial-grid" class="sudoku-grid"></div>
-    </section>
-    <section>
-      <h2>Résultats des algorithmes</h2>
-      <div id="algorithm-tabs" class="tabs"></div>
-      <div id="algorithm-results" class="results-container"></div>
-    </section>
-    <section>
-      <h2>Comparaison des performances</h2>
-      <div class="chart-container"><canvas id="execution-time-chart"></canvas></div>
-      <div class="chart-container"><canvas id="iterations-chart"></canvas></div>
-      <div class="chart-container"><canvas id="conflicts-chart"></canvas></div>
-      <div class="chart-container"><canvas id="false-cells-chart"></canvas></div>
-    </section>
-    <section>
-      <h2>Statistiques détaillées</h2>
-      <div class="table-container">
-        <table id="stats-table">
-          <thead>
-            <tr>
-              <th>Algorithme</th>
-              <th>Temps (s)</th>
-              <th>Itérations</th>
-              <th>Conflits</th>
-              <th>Cases fausses</th>
-              <th>Succès</th>
-            </tr>
-          </thead>
-          <tbody id="stats-table-body"></tbody>
-        </table>
+  <div class="particles-background"></div>
+  
+  <div class="game-container">
+    <!-- Header Section -->
+    <header class="game-header">
+      <div class="logo">
+        <div class="logo-icon">🧩</div>
+        <h1>Sudoku <span class="ai-text">AI</span> Comparator</h1>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>SudokuSolverAI &copy; 2025</p>
-  </footer>
-
-  <div class="loader" id="loader" style="display:none;">Chargement...</div>
-
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module" src="app.js"></script>
+      
+      <div class="difficulty-selector">
+        <div class="selector-box">
+          <label for="difficulty">Difficulty</label>
+          <select id="difficulty" class="game-select">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="expert" selected>Expert</option>
+          </select>
+        </div>
+        
+        <button id="run-level" class="game-button">
+          <span class="button-icon">🔄</span> Run Level
+        </button>
+        
+        <button id="run-all" class="game-button">
+          <span class="button-icon">🚀</span> Run All
+        </button>
+      </div>
+    </header>
+    
+    <!-- Game Board Layout -->
+    <div class="game-board">
+      <!-- Initial Grid Section -->
+      <section class="glass-card">
+        <h2 class="section-title">Initial Grid</h2>
+        <div id="initial-grid-container">
+          <div id="initial-grid" class="sudoku-grid"></div>
+        </div>
+      </section>
+      
+      <!-- Algorithm Results Section -->
+      <section class="glass-card">
+        <h2 class="section-title">Algorithm Results</h2>
+        
+        <div class="algorithm-tabs" id="algorithm-tabs">
+          <!-- Tabs will be dynamically generated -->
+        </div>
+        
+        <div class="results-container" id="results-container">
+          <!-- Results will be dynamically generated -->
+        </div>
+      </section>
+      
+      <!-- Performance Metrics Section -->
+      <section class="glass-card stats-section">
+        <h2 class="section-title">Performance Charts</h2>
+        <div class="metrics-grid">
+          <div class="chart-container">
+            <canvas id="timeChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="conflictsChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="successRateChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="memoryChart"></canvas>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Leaderboard Section -->
+      <section class="glass-card leaderboard-section">
+        <h2 class="section-title">Algorithm Comparison</h2>
+        
+        <div class="table-wrapper">
+          <table id="comparison-table">
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Category</th>
+                <th>Success</th>
+                <th>Time (s)</th>
+                <th>Iterations</th>
+                <th>Max Depth</th>
+                <th>Memory</th>
+                <th>Specific Metrics</th>
+              </tr>
+            </thead>
+            <tbody id="comparison-body">
+              <!-- Table rows will be dynamically generated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+      
+      <!-- Analysis Section -->
+      <section class="glass-card leaderboard-section">
+        <h2 class="section-title">Automated Analysis</h2>
+        <div id="analysis-container">
+          <!-- Analysis will be dynamically generated -->
+        </div>
+      </section>
+    </div>
+    
+    <footer class="game-footer">
+      <div class="footer-badge">Sudoku AI Comparator • v2.0</div>
+      <p>Performance analysis and visualization dashboard</p>
+    </footer>
+  </div>
+  
+  <script src="js/grid.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/analysis.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

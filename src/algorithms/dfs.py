@@ -1,5 +1,7 @@
+# ==== ALGORITHME : DFS (Recherche Aveugle) ====
+
 from copy import deepcopy
-from typing import Tuple
+from typing import Dict
 from src.core.grid import SudokuGrid
 from src.core.validator import is_valid, is_complete
 
@@ -15,30 +17,43 @@ def solve_dfs(grid):
     """
     DFS récursif pour résoudre une grille Sudoku.
     Explore en profondeur en remplissant les cases une par une.
+    Mesure : nombre d'itérations, profondeur max atteinte.
     """
-    iterations = [0]  # Utilise une liste pour garder une référence mutable
+    iterations = [0]
+    max_depth = [0]
+    current_depth = [0]
 
     def backtrack(grid):
         iterations[0] += 1
+        current_depth[0] += 1
+        max_depth[0] = max(max_depth[0], current_depth[0])
         empty = find_empty(grid)
         if not empty:
-            return True  # Grille complète
+            current_depth[0] -= 1
+            return True
 
         i, j = empty
         for num in range(1, 10):
             if is_valid(grid, i, j, num):
                 grid[i][j] = num
                 if backtrack(grid):
+                    current_depth[0] -= 1
                     return True
                 grid[i][j] = 0  # Annule si échec
-
+        current_depth[0] -= 1
         return False
 
     working_grid = deepcopy(grid)
     backtrack(working_grid)
-    return working_grid, iterations[0]
+    return working_grid, iterations[0], max_depth[0]
 
-#  Interface standard pour main.py
-def solve(sudoku_grid: SudokuGrid) -> Tuple[SudokuGrid, int]:
-    grid, iterations = solve_dfs(sudoku_grid.grid)
-    return SudokuGrid(grid), iterations
+def solve(sudoku_grid: SudokuGrid) -> Dict:
+    grid, iterations, max_depth = solve_dfs(sudoku_grid.grid)
+    taux_succes = is_complete(grid)
+    return {
+        "grille_resolue": grid,
+        "iterations": iterations,
+        "taux_succes": taux_succes,
+        "profondeur_max": max_depth,
+        "categorie": "recherche_aveugle"
+    }

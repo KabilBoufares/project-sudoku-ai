@@ -1,11 +1,113 @@
 [
   {
-    "algorithme": "Backtracking",
-    "temps": 0.0,
+    "grille_resolue": [
+      [
+        1,
+        3,
+        7,
+        4,
+        8,
+        2,
+        6,
+        5,
+        9
+      ],
+      [
+        8,
+        5,
+        9,
+        6,
+        7,
+        1,
+        3,
+        2,
+        4
+      ],
+      [
+        6,
+        2,
+        4,
+        5,
+        9,
+        3,
+        7,
+        8,
+        1
+      ],
+      [
+        2,
+        9,
+        6,
+        1,
+        5,
+        4,
+        8,
+        3,
+        7
+      ],
+      [
+        3,
+        4,
+        8,
+        2,
+        6,
+        7,
+        1,
+        9,
+        5
+      ],
+      [
+        7,
+        1,
+        5,
+        9,
+        3,
+        8,
+        4,
+        6,
+        2
+      ],
+      [
+        9,
+        6,
+        3,
+        7,
+        4,
+        5,
+        2,
+        1,
+        8
+      ],
+      [
+        4,
+        8,
+        1,
+        3,
+        2,
+        9,
+        5,
+        7,
+        6
+      ],
+      [
+        5,
+        7,
+        2,
+        8,
+        1,
+        6,
+        9,
+        4,
+        3
+      ]
+    ],
     "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "taux_succes": true,
+    "nb_backtracks": 0,
+    "profondeur_max": 1,
+    "categorie": "recherche_aveugle",
+    "algorithme": "Backtracking",
+    "temps": 0.0001,
     "grille_initiale": [
       [
         1,
@@ -107,6 +209,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -207,15 +312,13 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "profondeur_max": 1,
+    "categorie": "recherche_aveugle",
     "algorithme": "DFS",
     "temps": 0.0,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
     "grille_initiale": [
       [
         1,
@@ -317,6 +420,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -417,15 +523,13 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "memoire_max_file": 1,
+    "categorie": "recherche_aveugle",
     "algorithme": "BFS",
     "temps": 0.0,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
     "grille_initiale": [
       [
         1,
@@ -527,6 +631,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -627,15 +734,15 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "conflits_heuristique": 0,
+    "etats_explores": 1,
+    "memoire_max_file": 1,
+    "categorie": "recherche_informee",
     "algorithme": "A*",
     "temps": 0.0001,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
     "grille_initiale": [
       [
         1,
@@ -737,6 +844,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -837,15 +947,226 @@
         4,
         3
       ]
-    ]
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "conflits_heuristique": 0,
+    "etats_explores": 1,
+    "memoire_max_file": 1,
+    "categorie": "recherche_informee",
+    "algorithme": "A* + Backtracking",
+    "temps": 0.0001,
+    "grille_initiale": [
+      [
+        1,
+        3,
+        7,
+        4,
+        8,
+        2,
+        6,
+        5,
+        9
+      ],
+      [
+        8,
+        5,
+        9,
+        6,
+        7,
+        1,
+        3,
+        2,
+        4
+      ],
+      [
+        6,
+        2,
+        4,
+        5,
+        9,
+        3,
+        7,
+        8,
+        1
+      ],
+      [
+        2,
+        9,
+        6,
+        1,
+        5,
+        4,
+        8,
+        3,
+        7
+      ],
+      [
+        3,
+        4,
+        8,
+        2,
+        6,
+        7,
+        1,
+        9,
+        5
+      ],
+      [
+        7,
+        1,
+        5,
+        9,
+        3,
+        8,
+        4,
+        6,
+        2
+      ],
+      [
+        9,
+        6,
+        3,
+        7,
+        4,
+        5,
+        2,
+        1,
+        8
+      ],
+      [
+        4,
+        8,
+        1,
+        3,
+        2,
+        9,
+        5,
+        7,
+        6
+      ],
+      [
+        5,
+        7,
+        2,
+        8,
+        1,
+        6,
+        9,
+        4,
+        3
+      ]
+    ],
+    "cases_fausses": 0
   },
   {
+    "grille_resolue": [
+      [
+        1,
+        3,
+        7,
+        4,
+        8,
+        2,
+        6,
+        5,
+        9
+      ],
+      [
+        8,
+        5,
+        9,
+        6,
+        7,
+        1,
+        3,
+        2,
+        4
+      ],
+      [
+        6,
+        2,
+        4,
+        5,
+        9,
+        3,
+        7,
+        8,
+        1
+      ],
+      [
+        2,
+        9,
+        6,
+        1,
+        5,
+        4,
+        8,
+        3,
+        7
+      ],
+      [
+        3,
+        4,
+        8,
+        2,
+        6,
+        7,
+        1,
+        9,
+        5
+      ],
+      [
+        7,
+        1,
+        5,
+        9,
+        3,
+        8,
+        4,
+        6,
+        2
+      ],
+      [
+        9,
+        6,
+        3,
+        7,
+        4,
+        5,
+        2,
+        1,
+        8
+      ],
+      [
+        4,
+        8,
+        1,
+        3,
+        2,
+        9,
+        5,
+        7,
+        6
+      ],
+      [
+        5,
+        7,
+        2,
+        8,
+        1,
+        6,
+        9,
+        4,
+        3
+      ]
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "conflits_finaux": 0,
+    "categorie": "recherche_locale",
     "algorithme": "Hill Climbing",
-    "temps": 0.0001,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0002,
     "grille_initiale": [
       [
         1,
@@ -947,6 +1268,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -1047,15 +1371,14 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "conflits_finaux": 0,
+    "nb_restarts": 0,
+    "categorie": "recherche_locale",
     "algorithme": "Hill Climbing + Restart",
-    "temps": 0.0001,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0002,
     "grille_initiale": [
       [
         1,
@@ -1157,6 +1480,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -1257,15 +1583,13 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "conflits_finaux": 0,
+    "categorie": "recherche_locale",
     "algorithme": "Simulated Annealing",
-    "temps": 0.0001,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0002,
     "grille_initiale": [
       [
         1,
@@ -1367,6 +1691,9 @@
         3
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         1,
@@ -1467,15 +1794,15 @@
         4,
         3
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1,
+    "taux_succes": true,
+    "nb_assignations": 0,
+    "nb_backtracks": 0,
+    "taille_max_domaine": 0,
+    "categorie": "recherche_csp",
     "algorithme": "CSP + Forward Checking",
-    "temps": 0.0001,
-    "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0002,
     "grille_initiale": [
       [
         1,
@@ -1577,115 +1904,118 @@
         3
       ]
     ],
-    "grille_resolue": [
-      [
-        1,
-        3,
-        7,
-        4,
-        8,
-        2,
-        6,
-        5,
-        9
-      ],
-      [
-        8,
-        5,
-        9,
-        6,
-        7,
-        1,
-        3,
-        2,
-        4
-      ],
-      [
-        6,
-        2,
-        4,
-        5,
-        9,
-        3,
-        7,
-        8,
-        1
-      ],
-      [
-        2,
-        9,
-        6,
-        1,
-        5,
-        4,
-        8,
-        3,
-        7
-      ],
-      [
-        3,
-        4,
-        8,
-        2,
-        6,
-        7,
-        1,
-        9,
-        5
-      ],
-      [
-        7,
-        1,
-        5,
-        9,
-        3,
-        8,
-        4,
-        6,
-        2
-      ],
-      [
-        9,
-        6,
-        3,
-        7,
-        4,
-        5,
-        2,
-        1,
-        8
-      ],
-      [
-        4,
-        8,
-        1,
-        3,
-        2,
-        9,
-        5,
-        7,
-        6
-      ],
-      [
-        5,
-        7,
-        2,
-        8,
-        1,
-        6,
-        9,
-        4,
-        3
-      ]
-    ]
+    "cases_fausses": 0
   },
   {
-    "algorithme": "Beam Search",
-    "temps": 0.0,
+    "grille_resolue": [
+      [
+        1,
+        3,
+        7,
+        4,
+        8,
+        2,
+        6,
+        5,
+        9
+      ],
+      [
+        8,
+        5,
+        9,
+        6,
+        7,
+        1,
+        3,
+        2,
+        4
+      ],
+      [
+        6,
+        2,
+        4,
+        5,
+        9,
+        3,
+        7,
+        8,
+        1
+      ],
+      [
+        2,
+        9,
+        6,
+        1,
+        5,
+        4,
+        8,
+        3,
+        7
+      ],
+      [
+        3,
+        4,
+        8,
+        2,
+        6,
+        7,
+        1,
+        9,
+        5
+      ],
+      [
+        7,
+        1,
+        5,
+        9,
+        3,
+        8,
+        4,
+        6,
+        2
+      ],
+      [
+        9,
+        6,
+        3,
+        7,
+        4,
+        5,
+        2,
+        1,
+        8
+      ],
+      [
+        4,
+        8,
+        1,
+        3,
+        2,
+        9,
+        5,
+        7,
+        6
+      ],
+      [
+        5,
+        7,
+        2,
+        8,
+        1,
+        6,
+        9,
+        4,
+        3
+      ]
+    ],
     "iterations": 1,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "taux_succes": true,
+    "conflits_heuristique": 0,
+    "etats_explores": 1,
+    "memoire_max_beam": 1,
+    "categorie": "recherche_informee",
+    "algorithme": "Beam Search",
+    "temps": 0.0002,
     "grille_initiale": [
       [
         1,
@@ -1787,106 +2117,6 @@
         3
       ]
     ],
-    "grille_resolue": [
-      [
-        1,
-        3,
-        7,
-        4,
-        8,
-        2,
-        6,
-        5,
-        9
-      ],
-      [
-        8,
-        5,
-        9,
-        6,
-        7,
-        1,
-        3,
-        2,
-        4
-      ],
-      [
-        6,
-        2,
-        4,
-        5,
-        9,
-        3,
-        7,
-        8,
-        1
-      ],
-      [
-        2,
-        9,
-        6,
-        1,
-        5,
-        4,
-        8,
-        3,
-        7
-      ],
-      [
-        3,
-        4,
-        8,
-        2,
-        6,
-        7,
-        1,
-        9,
-        5
-      ],
-      [
-        7,
-        1,
-        5,
-        9,
-        3,
-        8,
-        4,
-        6,
-        2
-      ],
-      [
-        9,
-        6,
-        3,
-        7,
-        4,
-        5,
-        2,
-        1,
-        8
-      ],
-      [
-        4,
-        8,
-        1,
-        3,
-        2,
-        9,
-        5,
-        7,
-        6
-      ],
-      [
-        5,
-        7,
-        2,
-        8,
-        1,
-        6,
-        9,
-        4,
-        3
-      ]
-    ]
+    "cases_fausses": 0
   }
 ]

@@ -1,22 +1,21 @@
-# ==== ALGORITHME : A* (Recherche informée) ====
+# ==== ALGORITHME : A* + Backtracking (Recherche informée) ====
 
 import heapq
 import random
 from copy import deepcopy
 from typing import Dict
-from src.core.validator import is_valid, is_complete
 from src.core.grid import SudokuGrid
+from src.core.validator import is_valid, is_complete
 
-class AStarSolver:
+class AStarBT_Solver:
     def __init__(self, grid):
         self.original_grid = deepcopy(grid)
         self.iterations = 0
         self.solution = None
-        self.max_heap_size = 1  # Pour la mémoire max
-        self.visited_count = 0  # Nombre d'états uniques visités
+        self.max_heap_size = 1
+        self.visited_count = 0
 
     def heuristic(self, grid):
-        """Heuristique : nombre total de conflits (lignes + colonnes)."""
         conflicts = 0
         for i in range(9):
             row_counts = [0] * 10
@@ -29,7 +28,6 @@ class AStarSolver:
         return conflicts
 
     def get_next_states(self, grid):
-        """Génère les voisins en remplissant une seule case vide."""
         for i in range(9):
             for j in range(9):
                 if grid[i][j] == 0:
@@ -44,7 +42,6 @@ class AStarSolver:
         heap = []
         h = self.heuristic(self.original_grid)
         heapq.heappush(heap, (h, 0, self.original_grid))
-
         visited = set()
 
         while heap:
@@ -62,6 +59,7 @@ class AStarSolver:
                 self.solution = current
                 return True
 
+            # À chaque étape, on backtrack sur tous les voisins "valides"
             for neighbor in self.get_next_states(current):
                 hn = self.heuristic(neighbor)
                 heapq.heappush(heap, (steps + 1 + hn, steps + 1, neighbor))
@@ -73,8 +71,8 @@ class AStarSolver:
         return self.solution if self.solution else self.original_grid
 
 def solve(sudoku_grid: SudokuGrid) -> Dict:
-    solver = AStarSolver(sudoku_grid.grid)
-    res = solver.solve()
+    solver = AStarBT_Solver(sudoku_grid.grid)
+    solver.solve()
     taux_succes = is_complete(solver.grid)
     return {
         "grille_resolue": solver.grid,

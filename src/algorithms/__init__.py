@@ -1,19 +1,30 @@
+# ==== Imports des algorithmes (par catégorie) ====
+
+# --- Recherche aveugle ---
 from .backtracking import solve as backtracking
 from .dfs import solve as dfs
 from .bfs import solve as bfs
+
+# --- Recherche informée ---
 from .a_star import solve as a_star
+from .beam import solve as beam
+from .a_star_bt import solve as a_star_bt  # Assure-toi que ce fichier existe !
+
+# --- Recherche locale (métaheuristique) ---
 from .hill_climbing import solve as hill_climbing
 from .hill_climbing_restart import solve as hill_climbing_restart
 from .simulated_annealing import solve as simulated_annealing
-from .csp_forward import solve as csp_forward
-from .beam import solve as beam
 
-# Ce dictionnaire est utilisé dans main.py pour exécuter tous les solveurs
+# --- CSP (contraintes) ---
+from .csp_forward import solve as csp_forward
+
+# --- Dictionnaire centralisé des solveurs ---
 ALGORITHMS = {
     "Backtracking": backtracking,
     "DFS": dfs,
     "BFS": bfs,
     "A*": a_star,
+    "A* + Backtracking": a_star_bt,
     "Hill Climbing": hill_climbing,
     "Hill Climbing + Restart": hill_climbing_restart,
     "Simulated Annealing": simulated_annealing,

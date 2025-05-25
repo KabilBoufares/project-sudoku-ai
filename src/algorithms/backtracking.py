@@ -1,5 +1,7 @@
+# ==== ALGORITHME : Backtracking (Recherche Aveugle) ====
+
 from copy import deepcopy
-from typing import Tuple
+from typing import Dict
 from src.core.grid import SudokuGrid
 from src.core.validator import is_valid, is_complete
 
@@ -14,14 +16,21 @@ def find_empty(grid):
 def solve_backtracking(grid):
     """
     Résout une grille de Sudoku avec backtracking simple.
-    Retourne True si solution trouvée, False sinon.
+    Retourne la solution, le nombre d'itérations, le nombre de backtracks, la profondeur max.
     """
     iterations = [0]
+    backtracks = [0]
+    max_depth = [0]
+    current_depth = [0]
 
     def backtrack():
         iterations[0] += 1
+        current_depth[0] += 1
+        max_depth[0] = max(max_depth[0], current_depth[0])
+
         empty = find_empty(grid)
         if not empty:
+            current_depth[0] -= 1
             return True
 
         i, j = empty
@@ -29,15 +38,26 @@ def solve_backtracking(grid):
             if is_valid(grid, i, j, num):
                 grid[i][j] = num
                 if backtrack():
+                    current_depth[0] -= 1
                     return True
-                grid[i][j] = 0  # backtrack
+                grid[i][j] = 0
+                backtracks[0] += 1
+        current_depth[0] -= 1
         return False
 
     backtrack()
-    return grid, iterations[0]
+    return grid, iterations[0], backtracks[0], max_depth[0]
 
-#  Interface standard pour main.py
-def solve(sudoku_grid: SudokuGrid) -> Tuple[SudokuGrid, int]:
+# ==== Interface "moderne" pour main.py ====
+def solve(sudoku_grid: SudokuGrid) -> Dict:
     working_grid = deepcopy(sudoku_grid.grid)
-    grid, iterations = solve_backtracking(working_grid)
-    return SudokuGrid(grid), iterations
+    grid, iterations, backtracks, max_depth = solve_backtracking(working_grid)
+    taux_succes = is_complete(grid)
+    return {
+        "grille_resolue": grid,
+        "iterations": iterations,
+        "taux_succes": taux_succes,
+        "nb_backtracks": backtracks,
+        "profondeur_max": max_depth,
+        "categorie": "recherche_aveugle"
+    }

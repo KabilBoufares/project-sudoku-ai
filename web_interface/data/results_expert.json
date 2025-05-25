@@ -1,11 +1,113 @@
 [
   {
+    "grille_resolue": [
+      [
+        5,
+        3,
+        4,
+        6,
+        7,
+        8,
+        9,
+        1,
+        2
+      ],
+      [
+        6,
+        7,
+        2,
+        1,
+        9,
+        5,
+        3,
+        4,
+        8
+      ],
+      [
+        1,
+        9,
+        8,
+        3,
+        4,
+        2,
+        5,
+        6,
+        7
+      ],
+      [
+        8,
+        5,
+        9,
+        7,
+        6,
+        1,
+        4,
+        2,
+        3
+      ],
+      [
+        4,
+        2,
+        6,
+        8,
+        5,
+        3,
+        7,
+        9,
+        1
+      ],
+      [
+        7,
+        1,
+        3,
+        9,
+        2,
+        4,
+        8,
+        5,
+        6
+      ],
+      [
+        9,
+        6,
+        1,
+        5,
+        3,
+        7,
+        2,
+        8,
+        4
+      ],
+      [
+        2,
+        8,
+        7,
+        4,
+        1,
+        9,
+        6,
+        3,
+        5
+      ],
+      [
+        3,
+        4,
+        5,
+        2,
+        8,
+        6,
+        1,
+        7,
+        9
+      ]
+    ],
+    "iterations": 4209,
+    "taux_succes": true,
+    "nb_backtracks": 4157,
+    "profondeur_max": 52,
+    "categorie": "recherche_aveugle",
     "algorithme": "Backtracking",
-    "temps": 0.0256,
-    "iterations": 4209,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0268,
     "grille_initiale": [
       [
         5,
@@ -107,6 +209,9 @@
         9
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -207,15 +312,13 @@
         7,
         9
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 4209,
+    "taux_succes": true,
+    "profondeur_max": 52,
+    "categorie": "recherche_aveugle",
     "algorithme": "DFS",
-    "temps": 0.0252,
-    "iterations": 4209,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.0262,
     "grille_initiale": [
       [
         5,
@@ -317,6 +420,9 @@
         9
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -417,15 +523,13 @@
         7,
         9
       ]
-    ]
-  },
-  {
-    "algorithme": "BFS",
-    "temps": 0.1536,
+    ],
     "iterations": 4632,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "taux_succes": true,
+    "memoire_max_file": 738,
+    "categorie": "recherche_aveugle",
+    "algorithme": "BFS",
+    "temps": 0.1672,
     "grille_initiale": [
       [
         5,
@@ -527,6 +631,9 @@
         9
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -627,15 +734,15 @@
         7,
         9
       ]
-    ]
-  },
-  {
-    "algorithme": "A*",
-    "temps": 0.253,
+    ],
     "iterations": 4211,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "taux_succes": true,
+    "conflits_heuristique": 0,
+    "etats_explores": 4211,
+    "memoire_max_file": 14,
+    "categorie": "recherche_informee",
+    "algorithme": "A*",
+    "temps": 0.2732,
     "grille_initiale": [
       [
         5,
@@ -737,6 +844,9 @@
         9
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -837,15 +947,226 @@
         7,
         9
       ]
-    ]
+    ],
+    "iterations": 4211,
+    "taux_succes": true,
+    "conflits_heuristique": 0,
+    "etats_explores": 4211,
+    "memoire_max_file": 14,
+    "categorie": "recherche_informee",
+    "algorithme": "A* + Backtracking",
+    "temps": 0.2615,
+    "grille_initiale": [
+      [
+        5,
+        3,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        0,
+        1,
+        9,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        8,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        4,
+        0,
+        0,
+        8,
+        0,
+        3,
+        0,
+        0,
+        1
+      ],
+      [
+        7,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        6
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        0,
+        0,
+        2,
+        8,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        1,
+        9,
+        0,
+        0,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        7,
+        9
+      ]
+    ],
+    "cases_fausses": 0
   },
   {
+    "grille_resolue": [
+      [
+        5,
+        3,
+        4,
+        2,
+        7,
+        8,
+        9,
+        1,
+        7
+      ],
+      [
+        6,
+        2,
+        7,
+        1,
+        9,
+        5,
+        3,
+        4,
+        8
+      ],
+      [
+        1,
+        9,
+        8,
+        3,
+        4,
+        6,
+        5,
+        6,
+        2
+      ],
+      [
+        8,
+        1,
+        2,
+        5,
+        6,
+        4,
+        7,
+        9,
+        3
+      ],
+      [
+        4,
+        9,
+        6,
+        8,
+        7,
+        3,
+        2,
+        5,
+        1
+      ],
+      [
+        7,
+        5,
+        3,
+        9,
+        2,
+        1,
+        8,
+        4,
+        6
+      ],
+      [
+        9,
+        6,
+        5,
+        7,
+        3,
+        2,
+        2,
+        8,
+        4
+      ],
+      [
+        8,
+        7,
+        1,
+        4,
+        1,
+        9,
+        6,
+        3,
+        5
+      ],
+      [
+        2,
+        4,
+        3,
+        6,
+        8,
+        5,
+        1,
+        7,
+        9
+      ]
+    ],
+    "iterations": 15,
+    "taux_succes": false,
+    "conflits_finaux": 11,
+    "categorie": "recherche_locale",
     "algorithme": "Hill Climbing",
-    "temps": 0.0372,
-    "iterations": 16,
-    "succes": false,
-    "conflicts": 23,
-    "cases_fausses": 23,
+    "temps": 0.0374,
     "grille_initiale": [
       [
         5,
@@ -947,37 +1268,40 @@
         9
       ]
     ],
+    "cases_fausses": 20
+  },
+  {
     "grille_resolue": [
       [
         5,
         3,
+        4,
         2,
-        3,
         7,
         6,
-        5,
         9,
-        4
+        5,
+        8
       ],
       [
         6,
-        4,
+        1,
         7,
         1,
         9,
         5,
-        8,
-        1,
+        4,
+        3,
         2
       ],
       [
-        1,
+        2,
         9,
         8,
-        2,
+        3,
         4,
         8,
-        3,
+        1,
         6,
         7
       ],
@@ -985,77 +1309,76 @@
         8,
         9,
         1,
-        5,
+        7,
         6,
         4,
-        7,
+        5,
         2,
         3
       ],
       [
         4,
-        5,
+        2,
         6,
         8,
-        7,
+        5,
         3,
+        7,
         9,
-        4,
         1
       ],
       [
         7,
-        2,
+        5,
         3,
         9,
         2,
         1,
         8,
-        5,
+        4,
         6
       ],
       [
-        9,
-        6,
-        4,
-        7,
         3,
+        6,
+        9,
         5,
+        3,
+        7,
         2,
         8,
-        1
+        4
       ],
       [
-        2,
         7,
         8,
+        2,
         4,
         1,
         9,
         6,
-        3,
+        1,
         5
       ],
       [
-        3,
         1,
+        4,
         5,
         6,
         8,
         2,
-        4,
+        3,
         7,
         9
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 176,
+    "taux_succes": false,
+    "conflits_finaux": 7,
+    "nb_restarts": 10,
+    "categorie": "recherche_locale",
     "algorithme": "Hill Climbing + Restart",
-    "temps": 0.4337,
-    "iterations": 187,
-    "succes": false,
-    "conflicts": 12,
-    "cases_fausses": 12,
+    "temps": 0.4438,
     "grille_initiale": [
       [
         5,
@@ -1157,6 +1480,9 @@
         9
       ]
     ],
+    "cases_fausses": 14
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -1184,8 +1510,8 @@
         1,
         9,
         8,
-        4,
         3,
+        4,
         2,
         5,
         6,
@@ -1193,23 +1519,23 @@
       ],
       [
         8,
-        2,
-        9,
         5,
+        9,
+        7,
         6,
         1,
-        7,
+        4,
         2,
         3
       ],
       [
         4,
-        5,
+        2,
         6,
         8,
-        7,
+        5,
         3,
-        4,
+        7,
         9,
         1
       ],
@@ -1225,18 +1551,18 @@
         6
       ],
       [
-        3,
+        9,
         6,
         1,
-        2,
         5,
+        3,
         7,
         2,
         8,
         4
       ],
       [
-        9,
+        2,
         8,
         7,
         4,
@@ -1247,25 +1573,23 @@
         5
       ],
       [
-        2,
+        3,
         4,
         5,
-        3,
+        2,
         8,
         6,
         1,
         7,
         9
       ]
-    ]
-  },
-  {
+    ],
+    "iterations": 1671,
+    "taux_succes": true,
+    "conflits_finaux": 0,
+    "categorie": "recherche_locale",
     "algorithme": "Simulated Annealing",
-    "temps": 0.2295,
-    "iterations": 4958,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "temps": 0.085,
     "grille_initiale": [
       [
         5,
@@ -1367,6 +1691,9 @@
         9
       ]
     ],
+    "cases_fausses": 0
+  },
+  {
     "grille_resolue": [
       [
         5,
@@ -1467,15 +1794,15 @@
         7,
         9
       ]
-    ]
-  },
-  {
-    "algorithme": "CSP + Forward Checking",
-    "temps": 0.0048,
+    ],
     "iterations": 52,
-    "succes": true,
-    "conflicts": 0,
-    "cases_fausses": 0,
+    "taux_succes": true,
+    "nb_assignations": 51,
+    "nb_backtracks": 0,
+    "taille_max_domaine": 6,
+    "categorie": "recherche_csp",
+    "algorithme": "CSP + Forward Checking",
+    "temps": 0.005,
     "grille_initiale": [
       [
         5,
@@ -1577,115 +1904,118 @@
         9
       ]
     ],
-    "grille_resolue": [
-      [
-        5,
-        3,
-        4,
-        6,
-        7,
-        8,
-        9,
-        1,
-        2
-      ],
-      [
-        6,
-        7,
-        2,
-        1,
-        9,
-        5,
-        3,
-        4,
-        8
-      ],
-      [
-        1,
-        9,
-        8,
-        3,
-        4,
-        2,
-        5,
-        6,
-        7
-      ],
-      [
-        8,
-        5,
-        9,
-        7,
-        6,
-        1,
-        4,
-        2,
-        3
-      ],
-      [
-        4,
-        2,
-        6,
-        8,
-        5,
-        3,
-        7,
-        9,
-        1
-      ],
-      [
-        7,
-        1,
-        3,
-        9,
-        2,
-        4,
-        8,
-        5,
-        6
-      ],
-      [
-        9,
-        6,
-        1,
-        5,
-        3,
-        7,
-        2,
-        8,
-        4
-      ],
-      [
-        2,
-        8,
-        7,
-        4,
-        1,
-        9,
-        6,
-        3,
-        5
-      ],
-      [
-        3,
-        4,
-        5,
-        2,
-        8,
-        6,
-        1,
-        7,
-        9
-      ]
-    ]
+    "cases_fausses": 0
   },
   {
-    "algorithme": "Beam Search",
-    "temps": 0.0033,
+    "grille_resolue": [
+      [
+        5,
+        3,
+        0,
+        0,
+        7,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        6,
+        0,
+        0,
+        1,
+        9,
+        5,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        9,
+        8,
+        0,
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      [
+        8,
+        0,
+        0,
+        0,
+        6,
+        0,
+        0,
+        0,
+        3
+      ],
+      [
+        4,
+        0,
+        0,
+        8,
+        0,
+        3,
+        0,
+        0,
+        1
+      ],
+      [
+        7,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        6
+      ],
+      [
+        0,
+        6,
+        0,
+        0,
+        0,
+        0,
+        2,
+        8,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        4,
+        1,
+        9,
+        0,
+        0,
+        5
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        8,
+        0,
+        0,
+        7,
+        9
+      ]
+    ],
     "iterations": 44,
-    "succes": false,
-    "conflicts": 0,
-    "cases_fausses": 51,
+    "taux_succes": false,
+    "conflits_heuristique": 84,
+    "etats_explores": 44,
+    "memoire_max_beam": 5,
+    "categorie": "recherche_informee",
+    "algorithme": "Beam Search",
+    "temps": 0.0036,
     "grille_initiale": [
       [
         5,
@@ -1787,106 +2117,6 @@
         9
       ]
     ],
-    "grille_resolue": [
-      [
-        5,
-        3,
-        0,
-        0,
-        7,
-        0,
-        0,
-        0,
-        0
-      ],
-      [
-        6,
-        0,
-        0,
-        1,
-        9,
-        5,
-        0,
-        0,
-        0
-      ],
-      [
-        0,
-        9,
-        8,
-        0,
-        0,
-        0,
-        0,
-        6,
-        0
-      ],
-      [
-        8,
-        0,
-        0,
-        0,
-        6,
-        0,
-        0,
-        0,
-        3
-      ],
-      [
-        4,
-        0,
-        0,
-        8,
-        0,
-        3,
-        0,
-        0,
-        1
-      ],
-      [
-        7,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        0,
-        6
-      ],
-      [
-        0,
-        6,
-        0,
-        0,
-        0,
-        0,
-        2,
-        8,
-        0
-      ],
-      [
-        0,
-        0,
-        0,
-        4,
-        1,
-        9,
-        0,
-        0,
-        5
-      ],
-      [
-        0,
-        0,
-        0,
-        0,
-        8,
-        0,
-        0,
-        7,
-        9
-      ]
-    ]
+    "cases_fausses": 51
   }
 ]
